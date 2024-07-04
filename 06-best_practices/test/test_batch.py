@@ -50,8 +50,14 @@ if __name__ == '__main__':
         (2, 3, dt(1, 2, 0), dt(1, 2, 59)),
         (3, 4, dt(1, 2, 0), dt(2, 2, 1)),
     ]
-
-    prepare_data(data,columns,categorical)
+    input_path = f'/home/ubuntu/mlops_zoomcamp/06-best_practices/test/2022-01.parquet'
+    df = prepare_data(data,columns,categorical)
+    df.to_parquet(
+        input_path,
+        engine='pyarrow',
+        compression=None,
+        index=False
+        )
 
 def test():
     df_actual = prepare_data(data,columns,categorical)

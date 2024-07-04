@@ -5,6 +5,10 @@ import os
 import sys
 import pickle
 import pandas as pd
+import warnings
+warnings.filterwarnings("ignore")
+
+
 
 options = {
     'client_kwargs': {
@@ -44,7 +48,7 @@ def prepare_data(df: pd.DataFrame, categorical: list) -> pd.DataFrame:
 
 def save_data(df: pd.DataFrame, output_file: str) -> None:
     """Save data"""
-    df.to_parquet(output_file, engine='pyarrow', compression=None, index=False, storage_options=options)
+    df.to_parquet(output_file, engine='pyarrow', index=False, storage_options=options)
 
 
 def main():
@@ -76,7 +80,6 @@ def main():
     df_result = pd.DataFrame()
     df_result['ride_id'] = df['ride_id']
     df_result['predicted_duration'] = y_pred
-
 
     save_data(df_result, output_file)
 
