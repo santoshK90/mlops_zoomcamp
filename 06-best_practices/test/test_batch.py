@@ -10,18 +10,16 @@ columns=['PULocationID', 'DOLocationID', 'tpep_pickup_datetime', 'tpep_dropoff_d
 categorical = ['PULocationID', 'DOLocationID']
 
 data = [
-        (None, None, dt(1, 2), dt(1, 10)),
-        (1, None, dt(1, 2), dt(1, 10)),
-        (1, 2, dt(2, 2), dt(2, 3)),
-        (None, 1, dt(1, 2, 0), dt(1, 2, 50)),
-        (2, 3, dt(1, 2, 0), dt(1, 2, 59)),
-        (3, 4, dt(1, 2, 0), dt(2, 2, 1)),
+        (None, None, dt(1, 1), dt(1, 10)),
+        (1, 1, dt(1, 2), dt(1, 10)),
+        (1, None, dt(1, 2, 0), dt(1, 2, 59)),
+        (3, 4, dt(1, 2, 0), dt(2, 2, 1)),      
     ]
 
+
 #   PULocationID DOLocationID tpep_pickup_datetime tpep_dropoff_datetime  duration
-# 0           -1           -1  2022-01-01 01:02:00   2022-01-01 01:10:00       8.0
-# 1            1           -1  2022-01-01 01:02:00   2022-01-01 01:10:00       8.0
-# 2            1            2  2022-01-01 02:02:00   2022-01-01 02:03:00       1.0
+# 0           -1           -1  2022-01-01 01:01:00   2022-01-01 01:10:00       9.0
+# 1            1            1  2022-01-01 01:02:00   2022-01-01 01:10:00       8.0
 
 def prepare_data(data,columns,categorical):
     data = numpy.transpose(data)
@@ -43,14 +41,13 @@ if __name__ == '__main__':
     categorical = ['PULocationID', 'DOLocationID']
 
     data = [
-        (None, None, dt(1, 2), dt(1, 10)),
-        (1, None, dt(1, 2), dt(1, 10)),
-        (1, 2, dt(2, 2), dt(2, 3)),
-        (None, 1, dt(1, 2, 0), dt(1, 2, 50)),
-        (2, 3, dt(1, 2, 0), dt(1, 2, 59)),
-        (3, 4, dt(1, 2, 0), dt(2, 2, 1)),
+        (None, None, dt(1, 1), dt(1, 10)),
+        (1, 1, dt(1, 2), dt(1, 10)),
+        (1, None, dt(1, 2, 0), dt(1, 2, 59)),
+        (3, 4, dt(1, 2, 0), dt(2, 2, 1)),      
     ]
-    input_path = f'/home/ubuntu/mlops_zoomcamp/06-best_practices/test/2022-01.parquet'
+
+    input_path = f'/home/ubuntu/mlops_zoomcamp/06-best_practices/test/2023-01.parquet'
     df = prepare_data(data,columns,categorical)
     df.to_parquet(
         input_path,
@@ -64,9 +61,8 @@ def test():
     print(df_actual)
 
     data_expected = [
-        ('-1', '-1', 8.0),
-        ('1',  '-1', 8.0),
-        ('1', '2', 1.0),
+        ('-1', '-1', 9.0),
+        ('1',  '1', 8.0),
     ]
 
     columns_test = ['PULocationID', 'DOLocationID', 'duration']
